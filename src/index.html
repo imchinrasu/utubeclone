@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple YouTube Clone</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <nav aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><button type="button" id="homeButton" aria-label="Home"><img src="assets/home.ico" alt="Home"></button></li>
+          <li><button type="button" id="shortsButton" aria-label="Shorts"><img src="assets/shorts.ico" alt="Shorts"></button></li>
+          <li><button type="button" id="subscriptionsButton" aria-label="Subscriptions"><img src="assets/subscription.ico" alt="Subscriptions"></button></li>
+          <li><button type="button" id="profileButton" aria-label="Profile"><img src="assets/me.ico" alt="Profile"></button></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="header">
+        <div class="logo">
+          <img src="assets/pop_icon.ico" alt="MyTube logo">
+          <span class="brand-name">MyTube</span>
+        </div>
+
+        <div class="user-status" id="userStatus">Not signed in</div>
+
+        <div class="search">
+          <label class="sr-only" for="search">Search videos</label>
+          <input type="text" id="search" placeholder="Search videos">
+          <button type="button" id="searchButton">Search</button>
+        </div>
+      </header>
+
+      <p class="search-message" id="searchMessage" aria-live="polite"></p>
+
+      <section class="videos" id="videoSection">
+        <article class="video-card" data-title="Simple Coding Tutorial" data-channel="Code Channel" data-category="subscriptions">
+          <div class="thumb">Thumbnail 1</div>
+          <div class="video-info">
+            <h2 class="video-title">Simple Coding Tutorial</h2>
+            <p class="video-meta">Code Channel • 1.3M views</p>
+          </div>
+        </article>
+        <article class="video-card" data-title="JavaScript Basics" data-channel="Dev Tips" data-category="profile">
+          <div class="thumb">Thumbnail 2</div>
+          <div class="video-info">
+            <h2 class="video-title">JavaScript Basics</h2>
+            <p class="video-meta">Dev Tips • 860K views</p>
+          </div>
+        </article>
+        <article class="video-card" data-title="Music Relaxation Mix" data-channel="Chill Vibes" data-category="shorts">
+          <div class="thumb">Thumbnail 3</div>
+          <div class="video-info">
+            <h2 class="video-title">Music Relaxation Mix</h2>
+            <p class="video-meta">Chill Vibes • 3.1M views</p>
+          </div>
+        </article>
+        <article class="video-card" data-title="Travel Vlog Story" data-channel="Travel Journal" data-category="shorts">
+          <div class="thumb">Thumbnail 4</div>
+          <div class="video-info">
+            <h2 class="video-title">Travel Vlog Story</h2>
+            <p class="video-meta">Travel Journal • 520K views</p>
+          </div>
+        </article>
+        <article class="video-card" data-title="Design Tips for Beginners" data-channel="Creative Studio" data-category="main">
+          <div class="thumb">Thumbnail 5</div>
+          <div class="video-info">
+            <h2 class="video-title">Design Tips for Beginners</h2>
+            <p class="video-meta">Creative Studio • 900K views</p>
+          </div>
+        </article>
+        <article class="video-card" data-title="Movie Review Highlights" data-channel="Film Talk" data-category="profile">
+          <div class="thumb">Thumbnail 6</div>
+          <div class="video-info">
+            <h2 class="video-title">Movie Review Highlights</h2>
+            <p class="video-meta">Film Talk • 1.0M views</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="channels hidden" id="channelSection">
+        <article class="channel-card">
+          <div class="channel-avatar">C</div>
+          <div>
+            <h3>Code Channel</h3>
+            <p>Subscribed channel for programming content.</p>
+          </div>
+        </article>
+        <article class="channel-card">
+          <div class="channel-avatar">T</div>
+          <div>
+            <h3>Travel Journal</h3>
+            <p>Subscribed channel for travel vlogs.</p>
+          </div>
+        </article>
+        <article class="channel-card">
+          <div class="channel-avatar">F</div>
+          <div>
+            <h3>Film Talk</h3>
+            <p>Subscribed channel for movie reviews.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <div class="video-player-overlay hidden" id="videoPlayerOverlay" role="dialog" aria-modal="true" aria-labelledby="videoPlayerTitle">
+      <div class="player-card">
+        <button type="button" class="close-player" id="videoCloseButton" aria-label="Close video player">×</button>
+        <h2 id="videoPlayerTitle">Playing video</h2>
+        <video id="videoPlayer" controls>
+          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+          Your browser does not support HTML video.
+        </video>
+      </div>
+    </div>
+
+    <div class="login-overlay hidden" id="loginOverlay" role="dialog" aria-modal="true" aria-labelledby="loginOverlayTitle">
+      <div class="login-card">
+        <button type="button" class="close-login" id="loginCloseButton" aria-label="Close login">×</button>
+        <h2 id="loginOverlayTitle">MyTube account</h2>
+
+        <div class="auth-tabs" role="tablist" aria-label="Authentication mode">
+          <button type="button" class="auth-tab active" data-mode="signin" role="tab" aria-selected="true">Sign In</button>
+          <button type="button" class="auth-tab" data-mode="signup" role="tab" aria-selected="false">Sign Up</button>
+        </div>
+
+        <form id="authForm">
+          <label for="authId">Email or Username</label>
+          <input id="authId" type="text" placeholder="Enter email or username" required>
+          <label for="authPassword">Password</label>
+          <input id="authPassword" type="password" placeholder="Enter password" required>
+          <div id="authConfirmRow" class="hidden">
+            <label for="authConfirmPassword">Confirm Password</label>
+            <input id="authConfirmPassword" type="password" placeholder="Confirm password">
+          </div>
+          <button type="submit" id="authSubmit">Sign in</button>
+          <p class="login-note" id="authNote">Use your credentials to sign in or create an account.</p>
+        </form>
+
+        <div class="account-panel hidden" id="accountPanel">
+          <p class="auth-info" id="authInfo"></p>
+          <button type="button" id="showUpdatePassword">Change password</button>
+          <button type="button" id="deleteAccountButton">Delete account</button>
+          <button type="button" id="logoutButton">Log out</button>
+        </div>
+
+        <p class="login-message" id="loginMessage" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/api-service.js"></script>
+  <script src="scripts/auth-service.js"></script>
+  <script src="scripts/app.js" defer></script>
+</body>
+</html>
